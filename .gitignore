@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# UV
+.python-version
+uv.lock
+
+# CUDA 빌드
+build/
+*.o
+*.a
+*.so
+*.out
+*.exe
+
+# Python extension 빌드
+*.egg-info/
+dist/
+gpu_kernel_study.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 기타
+*.log
+*.prof
