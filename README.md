@@ -1,6 +1,6 @@
 # gpu-kernel-study
 
-CUDA & Triton kernel implementations with unified Python interface.
+Repository for CUDA & Triton kernel study
 
 ## 프로젝트 구조
 
