@@ -111,6 +111,9 @@ source .venv/bin/activate
 # pre-commit 설치
 pre-commit install
 
+# 코드 스타일 수동 점검 (선택)
+pre-commit run --all-files
+
 # Python extension 빌드
 pip install -e .
 ```
