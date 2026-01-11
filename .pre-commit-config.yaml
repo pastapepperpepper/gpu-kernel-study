@@ -1,17 +1,13 @@
 repos:
-  # Python 포매팅
-  - repo: https://github.com/psf/black
-    rev: 23.12.1
-    hooks:
-      - id: black
-        language_version: python3
-
-  # Python 린팅
+  # Python 포매팅 및 린팅
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.9
     hooks:
+      # 린팅
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
+      # 포매팅
+      - id: ruff-format
 
   # CUDA/C++ 포매팅
   - repo: https://github.com/pocc/pre-commit-hooks
