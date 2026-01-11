@@ -2,18 +2,66 @@
 name = "gpu-kernel-study"
 version = "0.1.0"
 description = "CUDA & Triton kernel study"
-requires-python = ">=3.11,<3.14"
+readme = "README.md"
+requires-python = ">=3.11"
 dependencies = [
     "torch==2.7.0",
-    "numpy>=1.24.0",
-]
-
-[project.optional-dependencies]
-triton = [
+    "numpy>=2.4.0",
     "triton>=3.0.0,<4.0.0",
 ]
+
+[build-system]
+requires = ["setuptools>=61", "torch==2.7.0", "numpy>=2.4.0"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-benchmark>=4.0.0",
+    "ruff>=0.1.0",
+]
+
+# --- SCENARIO 1: Internal Nexus (ACTIVE) ---
+# 사내 Nexus를 기본 저장소로 사용합니다.
+[[tool.uv.index]]
+url = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/"
+default = true
+
+# --- SCENARIO 2: External / Official (COMMENTED OUT) ---
+# 외부 환경에서 사용할 경우 위 SCENARIO 1을 주석 처리하고 아래 내용을 주석 해제하세요.
+# 공식 PyTorch 저장소와 PyPI를 사용합니다.
+#
+# [[tool.uv.index]]
+# name = "pytorch"
+# url = "https://download.pytorch.org/whl/cu124"
+# explicit = true
+#
+# [tool.uv.sources]
+# torch = { index = "pytorch" }
+
+[tool.uv]
+default-groups = ["dev"]
 
 [tool.ruff]
 line-length = 100
 target-version = "py311"
-ignore = ["E731"]  # Allow lambda assignments (common in Triton)
+
+[tool.ruff.lint]
+# F: Pyflakes, E/W: pycodestyle, I: isort, B: flake8-bugbear
+select = ["F", "E", "W", "I", "B"]
+ignore = [
+    "E731", # Do not assign a lambda expression, use a def (Common in kernel/triton code)
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --tb=short"

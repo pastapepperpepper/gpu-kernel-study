@@ -1,6 +1,6 @@
+import torch
 import triton
 import triton.language as tl
-import torch
 
 
 @triton.jit  # triton.jit decorator is used to compile the function into a triton kernel

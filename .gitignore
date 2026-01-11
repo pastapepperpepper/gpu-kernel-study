@@ -42,3 +42,4 @@ Thumbs.db
 # 기타
 *.log
 *.prof
+.specstory/

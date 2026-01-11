@@ -35,18 +35,37 @@ gpu-kernel-study/
 - **PyTorch** 2.7.0
 - **Triton** >= 3.0.0 (선택, 성능 비교용)
 
-## 설치
+## 환경 세팅 (최초 1회)
 
 ```bash
 # 의존성 설치
 uv sync
 
-# 또는 pip 사용
-pip install -e .
+# 가상환경 접속
+source .venv/bin/activate
 
-# Triton 지원 (선택)
-pip install -e ".[triton]"
+# 또는 pip 사용
+uv pip install -e . --no-build-isolation
+
+# 가상환경 내가 아닌 시스템에서 pre-commit 설치
+pip install pre-commit
 ```
+
+## 매일 개발 시
+
+```bash
+# 터미널 열고 활성화
+source .venv/bin/activate
+
+# 코드 수정
+# Python 파일(.py): 수정 후 바로 실행
+# CUDA 파일(.cu): 수정 후 아래 명령어로 빌드
+uv pip install -e . --no-build-isolation
+
+# 테스트/실행
+pytest tests/
+```
+
 
 ## 사용 방법
 
@@ -98,22 +117,3 @@ pytest tests/
 - **uv**: Python 패키지 관리 (`pyproject.toml`)
 - **pre-commit**: 커밋 전 스타일 점검
 - **clang-format**: CUDA/C++ 코드 포매팅
-
-## 시작하기
-
-```bash
-# uv로 의존성 설치
-uv sync
-
-# 가상환경 활성화
-source .venv/bin/activate
-
-# pre-commit 설치
-pre-commit install
-
-# 코드 스타일 수동 점검 (선택)
-pre-commit run --all-files
-
-# Python extension 빌드
-pip install -e .
-```
