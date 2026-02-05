@@ -31,7 +31,7 @@ def top_k_selection_in_block_kernel(input_ptr, output_ptr, n_elements, k, BLOCK_
 
 # input, output are tensors on the GPU
 def solve(input: torch.Tensor, output: torch.Tensor, N: int, k: int):
-    BLOCK_SIZE = 8192
+    BLOCK_SIZE = 1024
     grid_size = triton.cdiv(N, BLOCK_SIZE)
 
     # Alloc temp buffer
